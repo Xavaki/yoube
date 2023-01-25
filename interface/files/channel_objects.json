@@ -1,6 +1,7 @@
 {
     "UCsXVk37bltHxD1rDPwtNM8Q": {
         "name": "Kurzgesagt \u2013 In a Nutshell",
+        "channel_id": "UCsXVk37bltHxD1rDPwtNM8Q",
         "videos": [
             {
                 "feed_attrs": {
@@ -173,6 +174,7 @@
     },
     "UC_zQ777U6YTyatP3P1wi3xw": {
         "name": "NEVER TOO SMALL",
+        "channel_id": "UC_zQ777U6YTyatP3P1wi3xw",
         "videos": [
             {
                 "feed_attrs": {
@@ -308,7 +310,7 @@
             },
             {
                 "feed_attrs": {
-                    "title": "NEVER TOO SMALL: Japanese YouTuber\u2019s DIY Rental, Tokyo 58sqm/624sqft",
+                    "title": "NTS Renters: Japanese YouTuber\u2019s DIY Rental, Tokyo 58sqm/624sqft",
                     "published": "2022-12-01T05:00:22+00:00",
                     "yt_videoid": "dAc7uoO0Ago"
                 },
@@ -345,6 +347,7 @@
     },
     "UCj1VqrHhDte54oLgPG4xpuQ": {
         "name": "Stuff Made Here",
+        "channel_id": "UCj1VqrHhDte54oLgPG4xpuQ",
         "videos": [
             {
                 "feed_attrs": {
