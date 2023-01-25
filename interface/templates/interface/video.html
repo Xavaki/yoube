@@ -7,7 +7,18 @@
         <title>{{ video.feed_attrs.title }}</title>
     </head>
     <body>
-        <div class="title">{{ video.feed_attrs.title }}</div>
+        <div class="banner">
+            <h1>
+                <a href="{% url 'index' %}">Yoube</a>
+            </h1>
+        </div>
+        <div class="title-area">
+            <div class="title">
+                <h4>
+                    {{ video.feed_attrs.title }}
+                </h5>
+            </div>
+        </div>
         <div class="video">
             <iframe allow="fullscreen;"
                     width="1000"

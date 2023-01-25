@@ -7,7 +7,14 @@
         <title>{{ channel.name }}</title>
     </head>
     <body>
-        <h4>{{ channel.name }}</h4>
+        <div class="banner">
+            <h1>
+                <a href="{% url 'index' %}">Yoube</a>
+            </h1>
+        </div>
+        <div class="title-area">
+            <h4>{{ channel.name }}</h4>
+        </div>
         {% for video in channel.videos %}
             <div class="video">
                 <a href="{% url 'video' channel.channel_id video.feed_attrs.yt_videoid %}">{{ video.feed_attrs.title }}</a>
