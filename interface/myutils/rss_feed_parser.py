@@ -69,8 +69,8 @@ def parse_rss_feeds():
 
         if cid in saved_channels: 
             saved_channel_dict = saved_channels[cid]
-            if "name" not in saved_channel_dict:
-                saved_channel_dict["name"] = videos_feed[1]["author"]
+            saved_channel_dict["name"] = videos_feed[1]["author"]
+            saved_channel_dict["channel_id"] = cid
             saved_channel_dict_vids = [v["feed_attrs"]["yt_videoid"] for v in saved_channel_dict["videos"]]
             for video in videos_feed:
                 vidid = video["yt_videoid"]
@@ -85,7 +85,7 @@ def parse_rss_feeds():
             saved_channels[cid] = saved_channel_dict
         else:
             content_updated = True
-            channel_dict = {"name" : videos_feed[1]["author"], "videos" : [], "display" : True, "errors" : []}
+            channel_dict = {"name" : videos_feed[1]["author"], "channel_id" : cid, "videos" : [], "display" : True, "errors" : []}
             for video in videos_feed:
                 video_entry = generate_video_entry(video)
                 channel_dict["videos"].append(video_entry)
@@ -94,10 +94,10 @@ def parse_rss_feeds():
     return saved_channels
 
 
-# if __name__ == '__main__':
-#     response = parse_rss_feeds()
-#     with open('./channel_objects.json', 'w') as file:
-#         json.dump(response, file)
+if __name__ == '__main__':
+    response = parse_rss_feeds()
+    with open('interface/files/channel_objects.json', 'w') as file:
+        json.dump(response, file)
 
 
 
