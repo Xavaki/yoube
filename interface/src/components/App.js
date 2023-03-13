@@ -59,7 +59,7 @@ const App = () => {
                             style={{
                                 // marginRight: 15,
                             }}
-                        >Siito</Typography>
+                        >ottononooto 🐱</Typography>
                     </div>
                 </div>
                 <Grid container>
@@ -71,7 +71,7 @@ const App = () => {
                             height: "100%",
                             boxShadow: "none",
                         }}>
-                            <Paper sx={{
+                            {/* <Paper sx={{
                                 height: "15%",
                                 width: "70%",
                                 backgroundColor: "whitesmoke",
@@ -79,9 +79,9 @@ const App = () => {
                             }}
                                 elevation={0}
                             >
-                            </Paper>
+                            </Paper> */}
                             <Paper sx={{
-                                height: "85%",
+                                height: "100%",
                                 // backgroundColor: "whitesmoke",
                                 marginBottom: 20,
                                 overFlowY: "scroll"

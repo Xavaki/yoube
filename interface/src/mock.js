@@ -12,6 +12,7 @@ export const mockTags = {
 
 export const mockWords = [
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -21,6 +22,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -30,6 +32,7 @@ export const mockWords = [
         tags: ["verb"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -39,6 +42,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -48,6 +52,7 @@ export const mockWords = [
         tags: ["nom", "verb", "dificil"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -57,6 +62,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -66,6 +72,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -75,6 +82,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -84,6 +92,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -93,6 +102,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -102,6 +112,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
@@ -111,6 +122,7 @@ export const mockWords = [
         tags: ["nom"],
     },
     {
+        id: "0",
         name: "omedeto",
         translation: "felicitats, etc.",
         examples: [
