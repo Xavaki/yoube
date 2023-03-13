@@ -2,133 +2,37 @@ export const mockTags = {
     "nom": {
         color: "#f27d4b"
     },
-    "verb": {
+    "formal": {
         color: "#4bf280"
     },
-    "dificil": {
+    "puchi": {
         color: "#f24b99"
     },
 }
 
 export const mockWords = [
     {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
+        name: "otanjoubi",
+        translation: "aniversari",
         examples: [
             "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
         ],
         tags: ["nom"],
     },
     {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
+        name: "omedetou",
+        translation: "felicitats",
         examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
+            "Otanjoubi omedetou!",
         ],
-        tags: ["verb"],
+        tags: ["formal"],
     },
     {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
+        name: "puchi",
+        translation: "❤️",
         examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
+            "Otanjoubi omedetou!",
         ],
-        tags: ["nom"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom", "verb", "dificil"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom"],
-    },
-    {
-        id: "0",
-        name: "omedeto",
-        translation: "felicitats, etc.",
-        examples: [
-            "Otanjoubi omedeto!",
-            "Akemashite omedeto!",
-        ],
-        tags: ["nom"],
+        tags: ["puchi"],
     },
 ]

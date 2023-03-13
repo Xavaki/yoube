@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography, Chip, Skeleton } from '@mui/material';
-
+import { toKana } from 'wanakana';
 
 
 const WordTranslationField = props => {
@@ -10,33 +10,12 @@ const WordTranslationField = props => {
         handleFieldSelect
     } = props;
 
-    let [wordText, setWordText] = useState(text);
     let fontColor = isSelected ? "orange" : "black"
-
-    if (isSelected) {
-        document.onkeypress = function (e) {
-            e = e || window.event;
-            // desselect word on enter
-            if (e.key === 'Enter') {
-                handleFieldSelect(null);
-            } else {
-                setWordText(wordText + e.key);
-            }
-        };
-        document.onkeydown = function (e) {
-            e = e || window.event;
-            if (e.key === 'Backspace') {
-                setWordText(wordText.slice(0, -1))
-            }
-            // console.log(e.key)
-        };
-    }
-
 
     let displayText = () => {
         return (
             <div style={{ display: "flex" }}>
-                {wordText.toLowerCase()}
+                {text.toLowerCase()}
                 <Skeleton sx={{ bgcolor: fontColor, position: "relative", left: 3, visibility: isSelected ? "visible" : "hidden" }} />
             </div>
         )
@@ -44,7 +23,7 @@ const WordTranslationField = props => {
 
     return (
         <Typography variant='h6' style={{
-            marginBottom: 5,
+            marginBottom: 0,
             // color: fontColor,
         }}
             onClick={() => handleFieldSelect("translation")}
@@ -62,51 +41,50 @@ const WordNameField = props => {
         isSelected,
         handleFieldSelect
     } = props;
-
-    let [wordText, setWordText] = useState(text);
     let fontColor = isSelected ? "orange" : "black"
-
-    if (isSelected) {
-        document.onkeypress = function (e) {
-            if (e.code === 'Space') { e.preventDefault() }
-            e = e || window.event;
-            // desselect word on enter
-            if (e.key === 'Enter') {
-                handleFieldSelect("translation");
-            } else {
-                setWordText(wordText + e.key);
-            }
-        };
-        document.onkeydown = function (e) {
-            e = e || window.event;
-            if (e.key === 'Backspace') {
-                setWordText(wordText.slice(0, -1))
-            }
-        };
-    }
-
-
     let displayText = () => {
         return (
             <div style={{ display: "flex" }}>
-                {wordText.toLowerCase()}
+                {text.toLowerCase()}
                 <Skeleton sx={{ bgcolor: fontColor, position: "relative", left: 2, visibility: isSelected ? "visible" : "hidden" }} />
             </div>
         )
     }
 
     return (
-        <Typography variant='h5' style={{
-            marginRight: 10,
-            marginBottom: 1,
-            // color: fontColor,
-            cursor: isSelected ? null : "pointer",
-        }}
-
+        <div
             onClick={() => handleFieldSelect("name")}
+            style={{
+                display: "flex",
+                marginRight: 10,
+                marginBottom: 0,
+                // color: fontColor,
+                cursor: isSelected ? null : "pointer",
+            }}
         >
-            {displayText()}
-        </Typography >
+            <Typography variant='h5' style={{
+
+            }}
+            >
+                {displayText()}
+            </Typography >
+            {(text !== "") &&
+                <>
+                    <Typography variant='h5' style={{
+                        marginLeft: 5,
+                        marginRight: 8
+                    }}
+                    >
+                        ·
+                    </Typography >
+                    <Typography variant='h5' style={{
+                    }}
+                    >
+                        {toKana(text)}
+                    </Typography >
+                </>
+            }
+        </div>
     )
 
 
@@ -120,10 +98,10 @@ const Word = props => {
         allTags,
         isSelected,
         handleSelectWord,
-        handleDesselectWord
+        addWord,
+        deleteWord,
     } = props;
 
-    let [wordText, setWordText] = useState(word.name);
     let fontColor = isSelected ? "gray" : "black";
     let [selectedField, setSelectedField] = useState("name");
 
@@ -132,157 +110,176 @@ const Word = props => {
     }
 
     let handleFieldSelect = fieldname => {
-        setSelectedField(fieldname);
+        if (!(fieldname === 'translation' && nameText === "")) {
+            setSelectedField(fieldname);
+        }
     }
 
-    return (
-        <div
-            style={{
-                marginBottom: 5,
-            }}
-            onClick={() => clickWord()}
-        >
-            <div style={{
-                display: "flex",
-            }}
-            >
-                <WordNameField
-                    text={word.name}
-                    isSelected={isSelected && selectedField === "name"}
-                    handleFieldSelect={handleFieldSelect}
-                />
-                <div style={{
-                    display: "flex",
-                }}>
-                    {word.tags.map((tag, tid) => {
-                        return (
-                            <Chip
-                                size="small"
-                                label={tag}
-                                onClick={() => { }}
-                                style={{
-                                    marginRight: 3,
-                                    // color: "white",
-                                    backgroundColor: allTags[tag].color,
-                                }} />
-                        )
-                    })}
-                </div>
-            </div>
-            <WordTranslationField
-                text={word.translation}
-                isSelected={isSelected && selectedField === "translation"}
-                handleFieldSelect={handleFieldSelect}
-            />
-        </div>
-    )
-}
+    let [nameText, setNameText] = useState(word.name);
+    let [translationText, setTranslationText] = useState(word.translation);
 
+    useEffect(() => {
+        setNameText(word.name);
+        setTranslationText(word.translation)
+    }, [word])
 
-const AddWord = props => {
+    let addAndSelectWord = () => {
+        addWord(id + 1)
+        handleSelectWord(id + 1)
+    }
 
-    let {
-        id,
-        isSelected,
-        handleSelectWord,
-        handleDesselectWord
-    } = props;
-
-    let [wordText, setWordText] = useState("");
+    let deleteAndSelectPrevWord = () => {
+        handleSelectWord(id - 1)
+        deleteWord(id)
+    }
 
     if (isSelected) {
         document.onkeypress = function (e) {
             e = e || window.event;
             // desselect word on enter
             if (e.key === 'Enter') {
-                handleDesselectWord()
+                if (selectedField === 'translation') {
+                    addAndSelectWord()
+                } else { handleFieldSelect('translation') }
             } else {
-                setWordText(wordText + e.key);
+                if (selectedField === 'name') {
+                    setNameText(nameText + e.key)
+                } else if (selectedField === 'translation') {
+                    setTranslationText(translationText + e.key);
+                }
             }
         };
         document.onkeydown = function (e) {
             e = e || window.event;
             if (e.key === 'Backspace') {
-                setWordText(wordText.slice(0, -1))
+                if (selectedField === 'name') {
+                    if (nameText.length === 0) {
+                        deleteAndSelectPrevWord()
+                    } else {
+                        setNameText(nameText.slice(0, -1))
+                    }
+                } else if (selectedField === 'translation') {
+                    if (translationText.length === 0) {
+                        handleFieldSelect('name')
+                    } else {
+                        setTranslationText(translationText.slice(0, -1))
+
+                    }
+                }
             }
-            // console.log(e.key)
-        };
-    }
+        }
+    };
 
-    let clickWord = () => {
-        handleSelectWord(0)
-    }
-
-    let wordField = () => {
-        if (isSelected) {
-            return wordText === "" ? <Skeleton /> : wordText
-        } return <Skeleton animation={false} />
-    }
-
+    let [wordAdderOpacity, setWordAdderOpacity] = useState(0)
 
     return (
         <div
             style={{
-                marginBottom: 10,
-            }}>
-            <div style={{
-                display: "flex",
-            }}>
-                <Typography variant='h5' style={{
-                    marginRight: 10,
-                    marginBottom: 1,
-                    width: "20%",
-                    cursor: "pointer",
-                }}
-
-                    onClick={() => clickWord()}
-                >
-                    {wordField()}
-                </Typography>
-            </div>
-            <Typography variant='h6' style={{
                 marginBottom: 5,
-                width: "10%",
-                // color: fontColor,
-            }}>
-                <Skeleton animation={false} />
-            </Typography>
+            }}
+        >
+            <div
+                onClick={() => clickWord()}
+            >
+                <div style={{
+                    display: "flex",
+                }}
+                >
+                    <WordNameField
+                        text={nameText}
+                        isSelected={isSelected && selectedField === "name"}
+                        handleFieldSelect={handleFieldSelect}
+                    />
+                    <div style={{
+                        display: "flex",
+                    }}>
+                        {word.tags.map((tag, tid) => {
+                            return (
+                                <Chip
+                                    size="small"
+                                    label={tag}
+                                    onClick={() => { }}
+                                    style={{
+                                        marginRight: 3,
+                                        // color: "white",
+                                        backgroundColor: allTags[tag].color,
+                                    }} />
+                            )
+                        })}
+                    </div>
+                </div>
+                <WordTranslationField
+                    text={translationText}
+                    isSelected={isSelected && selectedField === "translation"}
+                    handleFieldSelect={handleFieldSelect}
+                />
+            </div>
+            <div
+                onMouseEnter={() => setWordAdderOpacity(1)}
+                onMouseLeave={() => setWordAdderOpacity(0)}
+                onClick={() => {
+                    addAndSelectWord()
+                }}
+                style={{
+                    backgroundColor: "whitesmoke",
+                    height: "10px",
+                    width: "15%",
+                    opacity: wordAdderOpacity,
+                }}>
+
+            </div>
         </div>
     )
 }
+
+
 const Words = props => {
 
-    let [selectedWord, setSelectedWord] = useState(null);
+    let {
+        words,
+        tags,
+        addWord,
+        selectedWord,
+        handleSelectWord,
+        handleDesselectWord,
+        deleteWord,
+    } = props;
 
-    let { words, tags } = props;
-    console.log(words);
-
-    let handleSelectWord = (id) => {
-        setSelectedWord(id);
-    }
-
-    let handleDesselectWord = () => {
-        setSelectedWord(null);
-    }
+    let [wordAdderOpacity, setWordAdderOpacity] = useState(0)
 
     return (
         <>
-            {/* <AddWord
-                id={0}
-                isSelected={selectedWord === 0}
-                handleSelectWord={handleSelectWord}
-                handleDesselectWord={handleDesselectWord}
-            /> */}
+            <div
+                onMouseEnter={() => setWordAdderOpacity(1)}
+                onMouseLeave={() => setWordAdderOpacity(0)}
+                onClick={() => {
+                    addWord(0)
+                    handleSelectWord(0)
+                }}
+                style={{
+                    backgroundColor: "whitesmoke",
+                    height: "10px",
+                    width: "15%",
+                    cursor: "pointer",
+                    opacity: wordAdderOpacity,
+                    marginBottom: 2,
+                }}>
+
+            </div>
             {words.map((word, id) => {
                 return (
-                    <Word
-                        id={id + 1}
-                        word={word}
-                        allTags={tags}
-                        isSelected={selectedWord === id + 1}
-                        handleSelectWord={handleSelectWord}
-                        handleDesselectWord={handleDesselectWord}
-                    />
+                    <>
+                        <Word
+                            id={id}
+                            word={word}
+                            allTags={tags}
+                            isSelected={selectedWord === id}
+                            handleSelectWord={handleSelectWord}
+                            handleDesselectWord={handleDesselectWord}
+                            addWord={addWord}
+                            deleteWord={deleteWord}
+                        />
+                    </>
 
                 )
             })}

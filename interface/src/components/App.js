@@ -16,9 +16,16 @@ const App = () => {
     const [wordsFetched, setWordsFetched] = useState(false);
     const [tags, setTags] = useState([]);
     const [tagsFetched, setTagsFetched] = useState(false);
+    let [selectedWord, setSelectedWord] = useState(null);
+    let handleSelectWord = (id) => {
+        setSelectedWord(id);
+    }
+
+    let handleDesselectWord = () => {
+        setSelectedWord(null);
+    }
 
     const fetchWords = async () => {
-        console.log("fetching words");
         if (!wordsFetched) {
             setWords(mockWords);
             setWordsFetched(true);
@@ -36,6 +43,22 @@ const App = () => {
     }, [])
     // fetchTags();
 
+    let addWord = index => {
+        const temp = [...words]
+        temp.splice(index, 0, {
+            id: "",
+            name: "",
+            translation: "",
+            examples: [],
+            tags: [],
+        })
+        setWords(temp)
+    }
+
+    let deleteWord = index => {
+        setWords(words.filter((word, id) => id !== index))
+    }
+
 
     return (
         <ThemeProvider theme={THEME}>
@@ -46,7 +69,7 @@ const App = () => {
             }}>
                 {/* <LinearProgress style={{ visibility: loading ? "visible" : "hidden" }} /> */}
                 <div className='titlebar' style={{
-                    marginBottom: 5,
+                    marginBottom: 3,
                 }}>
                     <div
                         style={{
@@ -88,7 +111,15 @@ const App = () => {
                             }}
                                 elevation={0}
                             >
-                                <Words words={words} tags={tags} />
+                                <Words
+                                    words={words}
+                                    tags={tags}
+                                    addWord={addWord}
+                                    selectedWord={selectedWord}
+                                    handleSelectWord={handleSelectWord}
+                                    handleDesselectWord={handleDesselectWord}
+                                    deleteWord={deleteWord}
+                                />
                             </Paper>
 
                         </Paper>
